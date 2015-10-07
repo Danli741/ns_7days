@@ -17,7 +17,7 @@ function outputFiles(pathnames, writer) {
         next(i + 1, len);
       });
     } else {
-      write.end();
+      writer.end();
     }
   } (0, pathnames.length));
 }
@@ -43,7 +43,7 @@ function validateFiles(pathnames, callback) {
 
 function main(argv) {
   var config = JSON.parse(fs.readFileSync(argv[0], 'utf-8')),
-      root = config.host;
+      root = config.host || '.';
       port = config.port;
 
   // create the server
@@ -51,7 +51,7 @@ function main(argv) {
 
       var urlInfo = parseURL(root, request.url);
 
-      validateFiles(urlInfo.pathnames, function (err, data) {
+      validateFiles(urlInfo.pathnames, function (err, pathnames) {
         if (err) {
           response.writeHead(404);
           response.end(err.message);
