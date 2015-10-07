@@ -1,6 +1,6 @@
 {
   "restApiRoot": "/api",
-  "host": "", 
-  "port": 0,
+  "host": "",
+  "port": 8888,
   "legacyExplorer": false
 }
